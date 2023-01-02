@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {Todolist} from './Todolist';
+import {TaskType, Todolist} from './Todolist';
 
 export const App: React.FC = () => {
 
@@ -26,12 +26,16 @@ export const App: React.FC = () => {
             {id: 4, title: 'JavaScript for Kids', isDone: true},
             {id: 5, title: `JavaScript Absolute Beginner's Guide`, isDone: false},
     ]);
-    
+
+    const removeTask = (taskID: number) => {
+        setTasks(tasks.filter((task: TaskType) => task.id !== taskID));
+    }
+
     return (
         <div className="App">
             {/*<Todolist title={'What to learn'} tasks={tasks1}/>*/}
             {/*<Todolist title={'What to buy'} tasks={tasks2}/>*/}
-            <Todolist title={'Reading list'} tasks={tasks}/>
+            <Todolist title={'Reading list'} tasks={tasks} removeTask={removeTask}/>
         </div>
     );
 }
