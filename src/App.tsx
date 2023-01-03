@@ -27,15 +27,26 @@ export const App: React.FC = () => {
             {id: 5, title: `JavaScript Absolute Beginner's Guide`, isDone: false},
     ]);
 
+    const [filter, setFilter] = useState<'All' | 'Active' | 'Completed'>('All');
+
     const removeTask = (taskID: number) => {
         setTasks(tasks.filter((task: TaskType) => task.id !== taskID));
+    }
+
+    let tasksForTodolist = tasks;
+
+    if (filter === 'Active') {
+        tasksForTodolist = tasks.filter((task) => task.isDone)
+    }
+    if (filter === 'Completed') {
+        tasksForTodolist = tasks.filter((task: TaskType) => !task.isDone)
     }
 
     return (
         <div className="App">
             {/*<Todolist title={'What to learn'} tasks={tasks1}/>*/}
             {/*<Todolist title={'What to buy'} tasks={tasks2}/>*/}
-            <Todolist title={'Reading list'} tasks={tasks} removeTask={removeTask}/>
+            <Todolist title={'Reading list'} tasks={tasksForTodolist} removeTask={removeTask} setFilter={setFilter}/>
         </div>
     );
 }

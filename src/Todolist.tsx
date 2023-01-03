@@ -10,12 +10,23 @@ type PropsType = {
     title: string;
     tasks: Array<TaskType>;
     removeTask: (taskID: number) => void;
+    setFilter: (filter: 'All' | 'Active' | 'Completed') => void;
 }
 
 export const Todolist: React.FC<PropsType> = (props) => {
 
     const removeTask = (taskID: number) => {
         props.removeTask(taskID);
+    }
+
+    const allTasks = () => {
+        props.setFilter('All')
+    }
+    const activeTasks = () => {
+        props.setFilter('Active')
+    }
+    const completedTasks = () => {
+        props.setFilter('Completed')
     }
 
     return (
@@ -52,9 +63,9 @@ export const Todolist: React.FC<PropsType> = (props) => {
                 {/*</li>*/}
             </div>
             <div style={{paddingTop: '15px'}}>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <button onClick={allTasks}>All</button>
+                <button onClick={activeTasks}>Active</button>
+                <button onClick={completedTasks}>Completed</button>
             </div>
         </div>
     );
