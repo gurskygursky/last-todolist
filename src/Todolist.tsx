@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 export type TaskType = {
     id: number;
@@ -13,9 +13,12 @@ type PropsType = {
     tasks: Array<TaskType>;
     removeTask: (taskID: number) => void;
     setFilter: (filter: TasksFilterType) => void;
+    addTask: (value: string) => void;
 }
 
 export const Todolist: React.FC<PropsType> = (props) => {
+
+    const [value, setValue] = useState<string>('');
 
     const removeTask = (taskID: number) => {
         props.removeTask(taskID);
@@ -31,11 +34,30 @@ export const Todolist: React.FC<PropsType> = (props) => {
         props.setFilter('Completed')
     }
 
+    const addTask = () => {
+        props.addTask(value);
+        setValue('');
+    }
+
+    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setValue(event.currentTarget.value);
+    }
+
+    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+
+        const {key} = event;
+
+        if (key === 'Enter') {
+            addTask();
+        }
+    }
+
     return (
         <div>
             <div>
                 <h3>{props.title}</h3>
-                <input/>
+                <input type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
+                <button onClick={addTask}>+</button>
             </div>
             <div style={{listStyle: 'none', paddingTop: '15px'}}>
                 {props.tasks.map((task: TaskType) => <li key={task.id}>

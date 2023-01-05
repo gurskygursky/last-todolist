@@ -27,12 +27,17 @@ export const App: React.FC = () => {
         tasksForTodolist = tasks.filter((task: TaskType) => !task.isDone)
     }
 
+    const addTask = (title: string) => {
+        setTasks([{id: new Date().getTime(), title, isDone: false}, ...tasks]);
+    }
+
     return (
         <div className="App">
             <Todolist title={'Reading list'}
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
                       setFilter={setFilter}
+                      addTask={addTask}
             />
         </div>
     );
