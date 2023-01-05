@@ -12,7 +12,6 @@ type PropsType = {
     title: string;
     tasks: Array<TaskType>;
     removeTask: (taskID: string) => void;
-    // setFilter: (filter: TasksFilterType) => void;
     changeTasksFilter: (filter: TasksFilterType) => void;
     addTask: (value: string) => void;
 }
@@ -25,14 +24,8 @@ export const Todolist: React.FC<PropsType> = (props) => {
         props.removeTask(taskID);
     }
 
-    const allTasks = () => {
-        props.changeTasksFilter('All')
-    }
-    const activeTasks = () => {
-        props.changeTasksFilter('Active')
-    }
-    const completedTasks = () => {
-        props.changeTasksFilter('Completed')
+    const onChangeTasksFilterHandler = (filter: TasksFilterType) => {
+        props.changeTasksFilter(filter);
     }
 
     const addTask = () => {
@@ -68,9 +61,9 @@ export const Todolist: React.FC<PropsType> = (props) => {
                 </li>)}
             </div>
             <div style={{paddingTop: '15px'}}>
-                <button onClick={allTasks}>All</button>
-                <button onClick={activeTasks}>Active</button>
-                <button onClick={completedTasks}>Completed</button>
+                <button onClick={() => onChangeTasksFilterHandler('All')}>All</button>
+                <button onClick={() => onChangeTasksFilterHandler('Active')}>Active</button>
+                <button onClick={() => onChangeTasksFilterHandler('Completed')}>Completed</button>
             </div>
         </div>
     );

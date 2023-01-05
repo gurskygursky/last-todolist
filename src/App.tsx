@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { v1 } from 'uuid';
+import {v1} from 'uuid';
 import './App.css';
 import {TasksFilterType, TaskType, Todolist} from './Todolist';
 
@@ -22,10 +22,10 @@ export const App: React.FC = () => {
     let tasksForTodolist = tasks;
 
     if (filter === 'Active') {
-        tasksForTodolist = tasks.filter((task) => task.isDone)
+        tasksForTodolist = tasks.filter((task: TaskType) => !task.isDone)
     }
     if (filter === 'Completed') {
-        tasksForTodolist = tasks.filter((task: TaskType) => !task.isDone)
+        tasksForTodolist = tasks.filter((task: TaskType) => task.isDone)
     }
 
     const addTask = (title: string) => {
