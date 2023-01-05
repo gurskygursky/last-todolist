@@ -5,11 +5,11 @@ import {TasksFilterType, TaskType, Todolist} from './Todolist';
 export const App: React.FC = () => {
 
     const [tasks, setTasks] = useState([
-        {id: 1, title: 'The Madness Of Crowds', isDone: true},
-        {id: 2, title: 'Atomic Habits:', isDone: true},
-        {id: 3, title: 'The Rise and Fall of the Third Reich', isDone: true},
-        {id: 4, title: 'JavaScript for Kids', isDone: true},
-        {id: 5, title: `JavaScript Absolute Beginner's Guide`, isDone: false},
+        {id: v1(), title: 'The Madness Of Crowds', isDone: true},
+        {id: v1(), title: 'Atomic Habits:', isDone: true},
+        {id: v1(), title: 'The Rise and Fall of the Third Reich', isDone: true},
+        {id: v1(), title: 'JavaScript for Kids', isDone: true},
+        {id: v1(), title: `JavaScript Absolute Beginner's Guide`, isDone: false},
     ]);
 
     const [filter, setFilter] = useState<TasksFilterType>('All');
@@ -28,7 +28,7 @@ export const App: React.FC = () => {
     }
 
     const addTask = (title: string) => {
-        setTasks([{id: new Date().getTime(), title, isDone: false}, ...tasks]);
+        setTasks([{id: v1(), title, isDone: false}, ...tasks]);
     }
 
     return (
@@ -42,3 +42,7 @@ export const App: React.FC = () => {
         </div>
     );
 }
+function v1(): any {
+    throw new Error('Function not implemented.');
+}
+
