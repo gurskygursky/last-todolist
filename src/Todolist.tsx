@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 
 export type TaskType = {
-    id: number;
+    id: string;
     title: string;
     isDone: boolean;
 }
@@ -11,7 +11,7 @@ export type TasksFilterType = 'All' | 'Active' | 'Completed';
 type PropsType = {
     title: string;
     tasks: Array<TaskType>;
-    removeTask: (taskID: number) => void;
+    removeTask: (taskID: string) => void;
     setFilter: (filter: TasksFilterType) => void;
     addTask: (value: string) => void;
 }
@@ -20,7 +20,7 @@ export const Todolist: React.FC<PropsType> = (props) => {
 
     const [value, setValue] = useState<string>('');
 
-    const removeTask = (taskID: number) => {
+    const removeTask = (taskID: string) => {
         props.removeTask(taskID);
     }
 

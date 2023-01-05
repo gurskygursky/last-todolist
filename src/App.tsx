@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { v1 } from 'uuid';
 import './App.css';
 import {TasksFilterType, TaskType, Todolist} from './Todolist';
 
@@ -14,7 +15,7 @@ export const App: React.FC = () => {
 
     const [filter, setFilter] = useState<TasksFilterType>('All');
 
-    const removeTask = (taskID: number) => {
+    const removeTask = (taskID: string) => {
         setTasks(tasks.filter((task: TaskType) => task.id !== taskID));
     }
 
@@ -42,7 +43,3 @@ export const App: React.FC = () => {
         </div>
     );
 }
-function v1(): any {
-    throw new Error('Function not implemented.');
-}
-
