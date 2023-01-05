@@ -32,12 +32,16 @@ export const App: React.FC = () => {
         setTasks([{id: v1(), title, isDone: false}, ...tasks]);
     }
 
+    const changeTasksFilter = (filter: TasksFilterType) => {
+        setFilter(filter)
+    }
+
     return (
         <div className="App">
             <Todolist title={'Reading list'}
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
-                      setFilter={setFilter}
+                      changeTasksFilter={changeTasksFilter}
                       addTask={addTask}
             />
         </div>

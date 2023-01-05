@@ -12,7 +12,8 @@ type PropsType = {
     title: string;
     tasks: Array<TaskType>;
     removeTask: (taskID: string) => void;
-    setFilter: (filter: TasksFilterType) => void;
+    // setFilter: (filter: TasksFilterType) => void;
+    changeTasksFilter: (filter: TasksFilterType) => void;
     addTask: (value: string) => void;
 }
 
@@ -25,13 +26,13 @@ export const Todolist: React.FC<PropsType> = (props) => {
     }
 
     const allTasks = () => {
-        props.setFilter('All')
+        props.changeTasksFilter('All')
     }
     const activeTasks = () => {
-        props.setFilter('Active')
+        props.changeTasksFilter('Active')
     }
     const completedTasks = () => {
-        props.setFilter('Completed')
+        props.changeTasksFilter('Completed')
     }
 
     const addTask = () => {
