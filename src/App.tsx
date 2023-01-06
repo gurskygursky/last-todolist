@@ -36,6 +36,10 @@ export const App: React.FC = () => {
         setFilter(filter)
     }
 
+    const changeTaskStatus = (taskID: string, isDone: boolean) => {
+        setTasks(tasks.map((task: TaskType) => task.id === taskID ? {...task, isDone} : task));
+    }
+
     return (
         <div className="App">
             <Todolist title={'Reading list'}
@@ -43,6 +47,7 @@ export const App: React.FC = () => {
                       removeTask={removeTask}
                       changeTasksFilter={changeTasksFilter}
                       addTask={addTask}
+                      changeTaskStatus={changeTaskStatus}
             />
         </div>
     );
