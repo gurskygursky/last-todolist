@@ -12,6 +12,7 @@ type PropsType = {
     title: string;
     tasks: Array<TaskType>;
     removeTask: (taskID: string) => void;
+    filter: TasksFilterType;
     changeTasksFilter: (filter: TasksFilterType) => void;
     addTask: (value: string) => void;
     changeTaskStatus: (taskID: string, isDone: boolean) => void;
@@ -67,7 +68,7 @@ export const Todolist: React.FC<PropsType> = (props) => {
                 <div style={{color: 'crimson'}}>{error}</div>
             </div>
             <div style={{listStyle: 'none', paddingTop: '15px'}}>
-                {props.tasks.map((task: TaskType) => <li key={task.id}>
+                {props.tasks.map((task: TaskType) => <li key={task.id} style={task.isDone ? {opacity: '0.5'} : {}}>
                     <input type={'checkbox'} checked={task.isDone}
                            onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeCheckboxHandler(task.id, event.currentTarget.checked)}
                     />
@@ -76,9 +77,12 @@ export const Todolist: React.FC<PropsType> = (props) => {
                 </li>)}
             </div>
             <div style={{paddingTop: '15px'}}>
-                <button onClick={() => onChangeTasksFilterHandler('All')}>All</button>
-                <button onClick={() => onChangeTasksFilterHandler('Active')}>Active</button>
-                <button onClick={() => onChangeTasksFilterHandler('Completed')}>Completed</button>
+                <button style={props.filter === 'All' ? {backgroundColor: 'deepskyblue'} : {}}
+                        onClick={() => onChangeTasksFilterHandler('All')}>All</button>
+                <button style={props.filter === 'Active' ? {backgroundColor: 'deepskyblue'} : {}}
+                        onClick={() => onChangeTasksFilterHandler('Active')}>Active</button>
+                <button style={props.filter === 'Completed' ? {backgroundColor: 'deepskyblue'} : {}}
+                        onClick={() => onChangeTasksFilterHandler('Completed')}>Completed</button>
             </div>
         </div>
     );

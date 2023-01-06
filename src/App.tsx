@@ -45,6 +45,7 @@ export const App: React.FC = () => {
             <Todolist title={'Reading list'}
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
+                      filter={filter}
                       changeTasksFilter={changeTasksFilter}
                       addTask={addTask}
                       changeTaskStatus={changeTaskStatus}
