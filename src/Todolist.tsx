@@ -20,6 +20,7 @@ type PropsType = {
 export const Todolist: React.FC<PropsType> = (props) => {
 
     const [value, setValue] = useState<string>('');
+    const [error, setError] = useState<string | null>('');
 
     const removeTask = (taskID: string) => {
         props.removeTask(taskID);
@@ -30,12 +31,18 @@ export const Todolist: React.FC<PropsType> = (props) => {
     }
 
     const addTask = () => {
-        props.addTask(value);
-        setValue('');
+        if (value.trim() !== '') {
+            props.addTask(value);
+            setValue('');
+        }
+        if (value.trim() === '') {
+            setError('Invalid value!')
+        }
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.currentTarget.value);
+        setError(null);
     }
 
     const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -55,8 +62,9 @@ export const Todolist: React.FC<PropsType> = (props) => {
         <div>
             <div>
                 <h3>{props.title}</h3>
-                <input type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
+                <input style={error ? {borderColor: 'crimson'} : {}} type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
                 <button onClick={addTask}>+</button>
+                <div style={{color: 'crimson'}}>{error}</div>
             </div>
             <div style={{listStyle: 'none', paddingTop: '15px'}}>
                 {props.tasks.map((task: TaskType) => <li key={task.id}>
