@@ -5,15 +5,21 @@ export type TaskType = {
     title: string;
     isDone: boolean;
 }
+export type TodolistType = {
+    id: string;
+    title: string;
+    filter: TasksFilterType;
+}
 
 export type TasksFilterType = 'All' | 'Active' | 'Completed';
 
 type PropsType = {
     title: string;
+    todolistID: string;
     tasks: Array<TaskType>;
     removeTask: (taskID: string) => void;
     filter: TasksFilterType;
-    changeTasksFilter: (filter: TasksFilterType) => void;
+    changeTasksFilter: (todolistID: string, filter: TasksFilterType) => void;
     addTask: (value: string) => void;
     changeTaskStatus: (taskID: string, isDone: boolean) => void;
 }
@@ -27,8 +33,8 @@ export const Todolist: React.FC<PropsType> = (props) => {
         props.removeTask(taskID);
     }
 
-    const onChangeTasksFilterHandler = (filter: TasksFilterType) => {
-        props.changeTasksFilter(filter);
+    const onChangeTasksFilterHandler = (todolistID: string, filter: TasksFilterType) => {
+        props.changeTasksFilter(todolistID, filter);
     }
 
     const addTask = () => {
@@ -78,11 +84,11 @@ export const Todolist: React.FC<PropsType> = (props) => {
             </div>
             <div style={{paddingTop: '15px'}}>
                 <button style={props.filter === 'All' ? {backgroundColor: 'deepskyblue'} : {}}
-                        onClick={() => onChangeTasksFilterHandler('All')}>All</button>
+                        onClick={() => onChangeTasksFilterHandler(props.todolistID, 'All')}>All</button>
                 <button style={props.filter === 'Active' ? {backgroundColor: 'deepskyblue'} : {}}
-                        onClick={() => onChangeTasksFilterHandler('Active')}>Active</button>
+                        onClick={() => onChangeTasksFilterHandler(props.todolistID,'Active')}>Active</button>
                 <button style={props.filter === 'Completed' ? {backgroundColor: 'deepskyblue'} : {}}
-                        onClick={() => onChangeTasksFilterHandler('Completed')}>Completed</button>
+                        onClick={() => onChangeTasksFilterHandler(props.todolistID,'Completed')}>Completed</button>
             </div>
         </div>
     );
