@@ -17,7 +17,7 @@ type PropsType = {
     title: string;
     todolistID: string;
     tasks: Array<TaskType>;
-    removeTask: (taskID: string) => void;
+    removeTask: (todolistID: string, taskID: string) => void;
     filter: TasksFilterType;
     changeTasksFilter: (todolistID: string, filter: TasksFilterType) => void;
     addTask: (value: string) => void;
@@ -29,8 +29,8 @@ export const Todolist: React.FC<PropsType> = (props) => {
     const [value, setValue] = useState<string>('');
     const [error, setError] = useState<string | null>('');
 
-    const removeTask = (taskID: string) => {
-        props.removeTask(taskID);
+    const removeTask = (todolistID: string, taskID: string) => {
+        props.removeTask(props.todolistID, taskID);
     }
 
     const onChangeTasksFilterHandler = (todolistID: string, filter: TasksFilterType) => {
@@ -79,7 +79,7 @@ export const Todolist: React.FC<PropsType> = (props) => {
                            onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeCheckboxHandler(task.id, event.currentTarget.checked)}
                     />
                     {task.title}
-                    <button onClick={() => removeTask(task.id)}>x</button>
+                    <button onClick={() => removeTask(props.todolistID, task.id)}>x</button>
                 </li>)}
             </div>
             <div style={{paddingTop: '15px'}}>
