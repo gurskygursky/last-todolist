@@ -63,7 +63,12 @@ export const App: React.FC = () => {
         // setFilter(filter)
     }
 
-    const changeTaskStatus = (taskID: string, isDone: boolean) => {
+    const changeTaskStatus = (todolistID: string, taskID: string, isDone: boolean) => {
+        setTasks({
+            ...tasks, [todolistID]: tasks[todolistID].map((task: TaskType) => task.id === taskID
+                ? {...task, isDone}
+                : task)
+        })
         // setTasks(tasks.map((task: TaskType) => task.id === taskID ? {...task, isDone} : task));
     }
 

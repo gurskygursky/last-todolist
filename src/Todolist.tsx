@@ -21,7 +21,7 @@ type PropsType = {
     filter: TasksFilterType;
     changeTasksFilter: (todolistID: string, filter: TasksFilterType) => void;
     addTask: (value: string) => void;
-    changeTaskStatus: (taskID: string, isDone: boolean) => void;
+    changeTaskStatus: (todolistID: string, taskID: string, isDone: boolean) => void;
 }
 
 export const Todolist: React.FC<PropsType> = (props) => {
@@ -62,7 +62,7 @@ export const Todolist: React.FC<PropsType> = (props) => {
     }
 
     const onChangeCheckboxHandler = (taskID: string, isDone: boolean) => {
-        props.changeTaskStatus(taskID, isDone)
+        props.changeTaskStatus(props.todolistID, taskID, isDone)
     }
 
     return (
