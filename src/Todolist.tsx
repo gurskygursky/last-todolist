@@ -20,7 +20,7 @@ type PropsType = {
     removeTask: (todolistID: string, taskID: string) => void;
     filter: TasksFilterType;
     changeTasksFilter: (todolistID: string, filter: TasksFilterType) => void;
-    addTask: (value: string) => void;
+    addTask: (todolistID: string, value: string) => void;
     changeTaskStatus: (todolistID: string, taskID: string, isDone: boolean) => void;
 }
 
@@ -39,7 +39,7 @@ export const Todolist: React.FC<PropsType> = (props) => {
 
     const addTask = () => {
         if (value.trim() !== '') {
-            props.addTask(value);
+            props.addTask(props.todolistID, value);
             setValue('');
         }
         if (value.trim() === '') {

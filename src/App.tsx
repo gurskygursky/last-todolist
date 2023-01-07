@@ -54,8 +54,9 @@ export const App: React.FC = () => {
     //     tasksForTodolist = tasks.filter((task: TaskType) => task.isDone)
     // }
 
-    const addTask = (title: string) => {
-        // setTasks([{id: v1(), title, isDone: false}, ...tasks]);
+    const addTask = (todolistID: string, title: string) => {
+        setTasks({...tasks, [todolistID]: [{id: v1(), title, isDone: false}, ...tasks[todolistID]]});
+        // setTasks([{id: v1(), title, i sDone: false}, ...tasks]);
     }
 
     const changeTasksFilter = (todolistID: string, filter: TasksFilterType) => {
