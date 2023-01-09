@@ -95,6 +95,10 @@ export const App: React.FC = () => {
         // setValue('');
     }
 
+    const changeTodolistTitle = (todolistID: string, value: string) => {
+        setLists(lists.map((list: TodolistType) => list.id === todolistID ? {...list, title: value} : list));
+    }
+
     // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
     //     const {key} = event;
     //
@@ -133,6 +137,7 @@ export const App: React.FC = () => {
                               addTask={addTask}
                               changeTaskStatus={changeTaskStatus}
                               removeTodolist={removeTodolist}
+                              changeTodolistTitle={changeTodolistTitle}
                     />
                 )
             })}

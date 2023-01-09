@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {InputForm} from './components/InputForm';
+import {EditForm} from './components/EditForm';
 
 export type TaskType = {
     id: string;
@@ -24,6 +25,8 @@ type PropsType = {
     addTask: (todolistID: string, value: string) => void;
     changeTaskStatus: (todolistID: string, taskID: string, isDone: boolean) => void;
     removeTodolist: (todolistID: string) => void;
+    changeTodolistTitle: (todolistID: string, value: string) => void;
+
 }
 
 export const Todolist: React.FC<PropsType> = (props) => {
@@ -65,11 +68,16 @@ export const Todolist: React.FC<PropsType> = (props) => {
         props.removeTodolist(props.todolistID);
     }
 
+    const changeTodolistTitle = (value: string) => {
+        props.changeTodolistTitle(props.todolistID, value);
+    }
+
     return (
         <div>
             <div>
                 <h3>
-                    {props.title}
+                    <EditForm value={props.title} callback={changeTodolistTitle} />
+                    {/*{props.title}*/}
                     <button onClick={removeTodolist}>x</button>
                 </h3>
                 <InputForm callback={addTask} />
