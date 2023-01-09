@@ -106,7 +106,7 @@ export const App: React.FC = () => {
 
     return (
         <div className="App">
-            <InputForm callbackHandler={addTodolist}/>
+            <InputForm callback={addTodolist}/>
             {/*<div>*/}
             {/*    <input type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>*/}
             {/*    <button onClick={() => addTodolist(value)}>+</button>*/}

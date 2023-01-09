@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {InputForm} from './components/InputForm';
 
 export type TaskType = {
     id: string;
@@ -27,8 +28,8 @@ type PropsType = {
 
 export const Todolist: React.FC<PropsType> = (props) => {
 
-    const [value, setValue] = useState<string>('');
-    const [error, setError] = useState<string | null>('');
+    // const [value, setValue] = useState<string>('');
+    // const [error, setError] = useState<string | null>('');
 
     const removeTask = (todolistID: string, taskID: string) => {
         props.removeTask(props.todolistID, taskID);
@@ -38,29 +39,23 @@ export const Todolist: React.FC<PropsType> = (props) => {
         props.changeTasksFilter(todolistID, filter);
     }
 
-    const addTask = () => {
-        if (value.trim() !== '') {
+    const addTask = (value: string) => {
             props.addTask(props.todolistID, value);
-            setValue('');
-        }
-        if (value.trim() === '') {
-            setError('Invalid value!')
-        }
     }
 
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setValue(event.currentTarget.value);
-        setError(null);
-    }
+    // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setValue(event.currentTarget.value);
+    //     setError(null);
+    // }
 
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-
-        const {key} = event;
-
-        if (key === 'Enter') {
-            addTask();
-        }
-    }
+    // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    //
+    //     const {key} = event;
+    //
+    //     if (key === 'Enter') {
+    //         addTask();
+    //     }
+    // }
 
     const onChangeCheckboxHandler = (taskID: string, isDone: boolean) => {
         props.changeTaskStatus(props.todolistID, taskID, isDone)
@@ -77,10 +72,11 @@ export const Todolist: React.FC<PropsType> = (props) => {
                     {props.title}
                     <button onClick={removeTodolist}>x</button>
                 </h3>
-                <input style={error ? {borderColor: 'crimson'} : {}} type={'text'} value={value}
-                       onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
-                <button onClick={addTask}>+</button>
-                <div style={{color: 'crimson'}}>{error}</div>
+                <InputForm callback={addTask} />
+                {/*<input style={error ? {borderColor: 'crimson'} : {}} type={'text'} value={value}*/}
+                {/*       onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>*/}
+                {/*<button onClick={addTask}>+</button>*/}
+                {/*<div style={{color: 'crimson'}}>{error}</div>*/}
             </div>
             <div style={{listStyle: 'none', paddingTop: '15px'}}>
                 {props.tasks.map((task: TaskType) => <li key={task.id} style={task.isDone ? {opacity: '0.5'} : {}}>
