@@ -73,6 +73,13 @@ export const App: React.FC = () => {
         // setTasks(tasks.map((task: TaskType) => task.id === taskID ? {...task, isDone} : task));
     }
 
+    const removeTodolist = (todolistID: string) => {
+        setLists(lists.filter((list: TodolistType) => list.id !== todolistID));
+        delete tasks[todolistID];
+        setTasks({...tasks});
+        console.log(tasks);
+    }
+
     return (
         <div className="App">
             {lists.map((list: TodolistType) => {
@@ -96,6 +103,7 @@ export const App: React.FC = () => {
                               changeTasksFilter={changeTasksFilter}
                               addTask={addTask}
                               changeTaskStatus={changeTaskStatus}
+                              removeTodolist={removeTodolist}
                     />
                 )
             })}

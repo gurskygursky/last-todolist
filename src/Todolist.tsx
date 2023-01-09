@@ -22,6 +22,7 @@ type PropsType = {
     changeTasksFilter: (todolistID: string, filter: TasksFilterType) => void;
     addTask: (todolistID: string, value: string) => void;
     changeTaskStatus: (todolistID: string, taskID: string, isDone: boolean) => void;
+    removeTodolist: (todolistID: string) => void;
 }
 
 export const Todolist: React.FC<PropsType> = (props) => {
@@ -65,11 +66,19 @@ export const Todolist: React.FC<PropsType> = (props) => {
         props.changeTaskStatus(props.todolistID, taskID, isDone)
     }
 
+    const removeTodolist = () => {
+        props.removeTodolist(props.todolistID);
+    }
+
     return (
         <div>
             <div>
-                <h3>{props.title}</h3>
-                <input style={error ? {borderColor: 'crimson'} : {}} type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
+                <h3>
+                    {props.title}
+                    <button onClick={removeTodolist}>x</button>
+                </h3>
+                <input style={error ? {borderColor: 'crimson'} : {}} type={'text'} value={value}
+                       onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
                 <button onClick={addTask}>+</button>
                 <div style={{color: 'crimson'}}>{error}</div>
             </div>
@@ -84,11 +93,14 @@ export const Todolist: React.FC<PropsType> = (props) => {
             </div>
             <div style={{paddingTop: '15px'}}>
                 <button style={props.filter === 'All' ? {backgroundColor: 'deepskyblue'} : {}}
-                        onClick={() => onChangeTasksFilterHandler(props.todolistID, 'All')}>All</button>
+                        onClick={() => onChangeTasksFilterHandler(props.todolistID, 'All')}>All
+                </button>
                 <button style={props.filter === 'Active' ? {backgroundColor: 'deepskyblue'} : {}}
-                        onClick={() => onChangeTasksFilterHandler(props.todolistID,'Active')}>Active</button>
+                        onClick={() => onChangeTasksFilterHandler(props.todolistID, 'Active')}>Active
+                </button>
                 <button style={props.filter === 'Completed' ? {backgroundColor: 'deepskyblue'} : {}}
-                        onClick={() => onChangeTasksFilterHandler(props.todolistID,'Completed')}>Completed</button>
+                        onClick={() => onChangeTasksFilterHandler(props.todolistID, 'Completed')}>Completed
+                </button>
             </div>
         </div>
     );
