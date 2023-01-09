@@ -26,7 +26,7 @@ type PropsType = {
     changeTaskStatus: (todolistID: string, taskID: string, isDone: boolean) => void;
     removeTodolist: (todolistID: string) => void;
     changeTodolistTitle: (todolistID: string, value: string) => void;
-
+    changeTaskTitle: (todolistID: string, taskID: string, value: string) => void;
 }
 
 export const Todolist: React.FC<PropsType> = (props) => {
@@ -71,6 +71,9 @@ export const Todolist: React.FC<PropsType> = (props) => {
     const changeTodolistTitle = (value: string) => {
         props.changeTodolistTitle(props.todolistID, value);
     }
+    const changeTaskTitle = (taskID: string, value: string) => {
+        props.changeTaskTitle(props.todolistID, taskID, value);
+    }
 
     return (
         <div>
@@ -91,7 +94,8 @@ export const Todolist: React.FC<PropsType> = (props) => {
                     <input type={'checkbox'} checked={task.isDone}
                            onChange={(event: ChangeEvent<HTMLInputElement>) => onChangeCheckboxHandler(task.id, event.currentTarget.checked)}
                     />
-                    {task.title}
+                    <EditForm callback={(value) => changeTaskTitle(task.id, value)} value={task.title}/>
+                    {/*{task.title}*/}
                     <button onClick={() => removeTask(props.todolistID, task.id)}>x</button>
                 </li>)}
             </div>

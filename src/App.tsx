@@ -98,6 +98,14 @@ export const App: React.FC = () => {
     const changeTodolistTitle = (todolistID: string, value: string) => {
         setLists(lists.map((list: TodolistType) => list.id === todolistID ? {...list, title: value} : list));
     }
+    const changeTaskTitle = (todolistID: string, taskID: string, value: string) => {
+        setTasks({
+            ...tasks, [todolistID]:
+                tasks[todolistID].map((task: TaskType) => task.id === taskID
+                    ? {...task, title: value}
+                    : task)
+        });
+    }
 
     // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
     //     const {key} = event;
@@ -138,6 +146,7 @@ export const App: React.FC = () => {
                               changeTaskStatus={changeTaskStatus}
                               removeTodolist={removeTodolist}
                               changeTodolistTitle={changeTodolistTitle}
+                              changeTaskTitle={changeTaskTitle}
                     />
                 )
             })}

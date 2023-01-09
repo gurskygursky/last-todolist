@@ -11,13 +11,9 @@ export const EditForm: React.FC<PropsType> = (props) => {
     const [error, setError] = useState<string | null>(null);
     const [editMode, setEditMode] = useState<boolean>(false);
 
-    const callbackHandler = () => {
-        props.callback(value);
-    }
-
     const editModeHandler = () => {
         if (value.trim() !== '') {
-            callbackHandler();
+            props.callback(value);
             setEditMode(!editMode);
         }
         if (value.trim() === '') {
@@ -36,7 +32,7 @@ export const EditForm: React.FC<PropsType> = (props) => {
 
         if (key === 'Enter') {
             if (value.trim() !== '') {
-                callbackHandler();
+                props.callback(value);
                 setEditMode(!editMode);
             }
             if (value.trim() === '') {
@@ -46,19 +42,14 @@ export const EditForm: React.FC<PropsType> = (props) => {
     }
 
     return (
-        <div style={{listStyle: 'none', paddingTop: '15px'}}>
-            {
-                editMode
-                    ? <input style={error ? {borderColor: 'crimson'} : {}}
-                             value={value}
-                             onChange={onChangeHandler}
-                             onKeyDown={onKeyPressHandler}
-                             onBlur={editModeHandler}
-                             autoFocus/>
-                    : <span onDoubleClick={editModeHandler}>{props.value}</span>
-            }
-            <div style={{color: 'crimson'}}>{error}</div>
-        </div>
+        editMode
+            ? <input style={error ? {borderColor: 'crimson', color: 'crimson'} : {}}
+                     value={error ? error : value}
+                     onChange={onChangeHandler}
+                     onKeyDown={onKeyPressHandler}
+                     onBlur={editModeHandler}
+                     autoFocus
+            />
+            : <span onDoubleClick={editModeHandler}>{props.value}</span>
     );
 };
-
