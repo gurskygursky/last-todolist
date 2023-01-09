@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {v1} from 'uuid';
 import './App.css';
 import {TasksFilterType, TaskType, Todolist, TodolistType} from './Todolist';
+import {InputForm} from './components/InputForm';
 
 export const App: React.FC = () => {
 
@@ -80,35 +81,36 @@ export const App: React.FC = () => {
         console.log(tasks);
     }
 
-    const [value, setValue] = useState<string>('');
+    // const [value, setValue] = useState<string>('');
 
-    const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setValue(event.currentTarget.value);
-    }
+    // const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setValue(event.currentTarget.value);
+    // }
 
     const addTodolist = (value: string) => {
         const newTodolistID = v1();
         const newTodolist: TodolistType = {id: newTodolistID, title: value, filter: 'All'};
         setLists([...lists, newTodolist]);
         setTasks({[newTodolistID]: [], ...tasks});
-        setValue('');
+        // setValue('');
     }
 
-    const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        const {key} = event;
-
-        if (key === 'Enter') {
-            addTodolist(value);
-            setValue('');
-        }
-    }
+    // const onKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    //     const {key} = event;
+    //
+    //     if (key === 'Enter') {
+    //         addTodolist(value);
+    //         setValue('');
+    //     }
+    // }
 
     return (
         <div className="App">
-            <div>
-                <input type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>
-                <button onClick={() => addTodolist(value)}>+</button>
-            </div>
+            <InputForm callbackHandler={addTodolist}/>
+            {/*<div>*/}
+            {/*    <input type={'text'} value={value} onChange={onChangeHandler} onKeyDown={onKeyPressHandler}/>*/}
+            {/*    <button onClick={() => addTodolist(value)}>+</button>*/}
+            {/*</div>*/}
             {lists.map((list: TodolistType) => {
 
                 let tasksForTodolist = tasks[list.id];
