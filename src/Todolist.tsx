@@ -1,7 +1,7 @@
-import React, {ChangeEvent} from 'react';
+import React from 'react';
 import {InputForm} from './components/InputForm';
 import {EditForm} from './components/EditForm';
-import {Checkbox} from './components/Checkbox';
+import {Tasks} from './Tasks';
 
 export type TaskType = {
     id: string;
@@ -69,19 +69,12 @@ export const Todolist: React.FC<PropsType> = (props) => {
                 </h3>
                 <InputForm callback={addTask}/>
             </div>
-            <div style={{listStyle: 'none', paddingTop: '15px'}}>
-                {props.tasks.map((task: TaskType) => <li key={task.id} style={task.isDone ? {opacity: '0.5'} : {}}>
-                    <Checkbox isDone={task.isDone}
-                              callback={(isDone) => onChangeCheckboxHandler(task.id, isDone)}
-                    />
-                    {/*<input type={'checkbox'} checked={task.isDone}*/}
-                    {/*       onChange={(event: ChangeEvent<HTMLInputElement>) =>*/}
-                    {/*           onChangeCheckboxHandler(task.id, event.currentTarget.checked)*/}
-                    {/*       }/>*/}
-                    <EditForm callback={(value) => changeTaskTitle(task.id, value)} value={task.title}/>
-                    <button onClick={() => removeTask(props.todolistID, task.id)}>x</button>
-                </li>)}
-            </div>
+            <Tasks todolistID={props.todolistID}
+                   tasks={props.tasks}
+                   removeTask={removeTask}
+                   changeTaskTitle={changeTaskTitle}
+                   onChangeCheckboxHandler={onChangeCheckboxHandler}
+            />
             <div style={{paddingTop: '15px'}}>
                 <button style={props.filter === 'All' ? {backgroundColor: 'deepskyblue'} : {}}
                         onClick={() => onChangeTasksFilterHandler(props.todolistID, 'All')}>All
