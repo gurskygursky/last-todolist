@@ -75,14 +75,17 @@ export const Todolist: React.FC<PropsType> = (props) => {
                    changeTaskTitle={changeTaskTitle}
                    onChangeCheckboxHandler={onChangeCheckboxHandler}
             />
-            <div style={{paddingTop: '15px'}}>
-                <button style={props.filter === 'All' ? {backgroundColor: 'deepskyblue'} : {}}
+            <div className={'blockButtons'}>
+                <button className={props.filter === 'All' ? 'button' : ''}
+                    // style={props.filter === 'All' ? {backgroundColor: 'deepskyblue'} : {}}
                         onClick={() => onChangeTasksFilterHandler(props.todolistID, 'All')}>All
                 </button>
-                <button style={props.filter === 'Active' ? {backgroundColor: 'deepskyblue'} : {}}
+                <button className={props.filter === 'Active' ? 'button' : ''}
+                    // style={props.filter === 'Active' ? {backgroundColor: 'deepskyblue'} : {}}
                         onClick={() => onChangeTasksFilterHandler(props.todolistID, 'Active')}>Active
                 </button>
-                <button style={props.filter === 'Completed' ? {backgroundColor: 'deepskyblue'} : {}}
+                <button className={props.filter === 'Completed' ? 'button' : ''}
+                    // style={props.filter === 'Completed' ? {backgroundColor: 'deepskyblue'} : {}}
                         onClick={() => onChangeTasksFilterHandler(props.todolistID, 'Completed')}>Completed
                 </button>
             </div>

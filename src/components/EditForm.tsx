@@ -43,7 +43,8 @@ export const EditForm: React.FC<PropsType> = (props) => {
 
     return (
         editMode
-            ? <input style={error ? {borderColor: 'crimson', color: 'crimson'} : {}}
+            ? <input className={error ? 'error' : ''}
+                // style={error ? {borderColor: 'crimson', color: 'crimson'} : {}}
                      value={error ? error : value}
                      onChange={onChangeHandler}
                      onKeyDown={onKeyPressHandler}

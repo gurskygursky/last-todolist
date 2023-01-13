@@ -13,9 +13,11 @@ type PropsType = {
 
 export const Tasks: React.FC<PropsType> = (props) => {
     return (
-        <div style={{listStyle: 'none', paddingTop: '15px'}}>
+        <ul className={'list'}>
             {
-                props.tasks.map((task: TaskType) => <li key={task.id} style={task.isDone ? {opacity: '0.5'} : {}}>
+                props.tasks.map((task: TaskType) => <li key={task.id} className={'isDone'}
+                                                        // style={task.isDone ? {opacity: '0.5'} : {}}
+                >
                     <Checkbox isDone={task.isDone}
                               callback={(isDone) => props.onChangeCheckboxHandler(task.id, isDone)}
                     />
@@ -23,6 +25,6 @@ export const Tasks: React.FC<PropsType> = (props) => {
                     <button onClick={() => props.removeTask(props.todolistID, task.id)}>x</button>
                 </li>)
             }
-        </div>
+        </ul>
     )
 };

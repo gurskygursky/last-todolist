@@ -12,6 +12,7 @@ export const InputForm: React.FC<PropsType> = (props) => {
 
     const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setValue(event.currentTarget.value);
+        setError(null);
     }
 
     const callbackHandler = () => {
@@ -35,14 +36,15 @@ export const InputForm: React.FC<PropsType> = (props) => {
 
     return (
         <div>
-            <input style={error ? {borderColor: 'crimson'} : {}}
+            <input className={error ? 'error' : ''}
+                   // style={error ? {borderColor: 'crimson'} : {}}
                    type={'text'}
                    value={value}
                    onChange={onChangeHandler}
                    onKeyDown={onKeyPressHandler}
             />
             <button onClick={callbackHandler}>+</button>
-            <div style={{color: 'crimson'}}>{error}</div>
+            <div className={error ? 'textError' : ''}>{error}</div>
         </div>
     );
 };

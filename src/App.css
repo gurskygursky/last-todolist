@@ -2,8 +2,36 @@
     padding: 30px;
     display: flex;
     margin-left: 20px;
-  }
-  
-  .App > div {
+}
+
+.App > div {
     margin-right: 50px;
-  }
+}
+
+.button {
+    background-color: deepskyblue;
+}
+
+.isDone {
+    opacity: 0.5;
+}
+
+.list {
+    padding-left: 0;
+    list-style: none;
+    padding-top: 15px;
+}
+
+.buttons {
+    padding-top: 15px;
+}
+
+.error {
+    color: crimson;
+    border: solid 2px crimson;
+    border-radius: 3px;
+}
+
+.textError {
+    color: crimson;
+}
