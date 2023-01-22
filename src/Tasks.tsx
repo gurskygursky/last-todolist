@@ -15,8 +15,7 @@ export const Tasks: React.FC<PropsType> = (props) => {
     return (
         <ul className={'list'}>
             {
-                props.tasks.map((task: TaskType) => <li key={task.id} className={'isDone'}
-                                                        // style={task.isDone ? {opacity: '0.5'} : {}}
+                props.tasks.map((task: TaskType) => <li key={task.id} className={task.isDone ? 'isDone' : ''}
                 >
                     <Checkbox isDone={task.isDone}
                               callback={(isDone) => props.onChangeCheckboxHandler(task.id, isDone)}
