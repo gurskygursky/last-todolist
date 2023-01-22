@@ -3,8 +3,8 @@ import {v1} from 'uuid';
 import './App.css';
 import {TasksFilterType, TaskType, Todolist, TodolistType} from './Todolist';
 import {InputForm} from './components/InputForm';
-import {tasksReducer} from './reducers/tasks-reducer';
-import {todolistReducer} from './reducers/todolist-reducer';
+import {removeTaskAC, tasksReducer} from './reducers/tasks-reducer';
+import {removeTodolistAC, todolistReducer} from './reducers/todolist-reducer';
 
 export const AppWithReducer: React.FC = () => {
 
@@ -34,6 +34,7 @@ export const AppWithReducer: React.FC = () => {
     });
 
     const removeTask = (todolistID: string, taskID: string) => {
+        setTasksDispatch(removeTaskAC(todolistID, taskID));
         // setTasks({...tasks, [todolistID]: tasks[todolistID].filter((task: TaskType) => task.id !== taskID)});
     }
 
@@ -54,6 +55,7 @@ export const AppWithReducer: React.FC = () => {
     }
 
     const removeTodolist = (todolistID: string) => {
+        setListsDispatch(removeTodolistAC(todolistID));
         // setLists(lists.filter((list: TodolistType) => list.id !== todolistID));
         // delete tasks[todolistID];
         // setTasks({...tasks});
