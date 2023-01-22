@@ -13,6 +13,9 @@ export type TodolistType = {
     title: string;
     filter: TasksFilterType;
 }
+export type TasksType = {
+    [key: string]: Array<TaskType>
+}
 
 export type TasksFilterType = 'All' | 'Active' | 'Completed';
 
