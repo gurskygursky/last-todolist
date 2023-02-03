@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {TasksType, TaskType} from "../Todolist";
-import {RemoveTodolistActionType} from "./todolist-reducer";
+import {AddTodolistActionType, RemoveTodolistActionType} from "./todolist-reducer";
 
 enum ACTIONS {
     REMOVE_TASK = 'REMOVE_TASK',
@@ -8,9 +8,10 @@ enum ACTIONS {
     ADD_TASK = 'ADD_TASK',
     TASK_STATUS_CHANGED = 'TASK_STATUS_CHANGED',
     TASK_TITLE_CHANGED = 'TASK_TITLE_CHANGED',
+    ADD_TODOLIST = 'ADD_TODOLIST',
 }
 
-export const tasksReducer = (state: TasksType, action: TasksReducerActionsType | RemoveTodolistActionType): TasksType => {
+export const tasksReducer = (state: TasksType, action: TasksReducerActionsType | RemoveTodolistActionType | AddTodolistActionType): TasksType => {
     switch (action.type) {
         case ACTIONS.REMOVE_TASK:
             return {
@@ -46,6 +47,9 @@ export const tasksReducer = (state: TasksType, action: TasksReducerActionsType |
                     state[action.payload.todolistID].map((task: TaskType) => task.id === action.payload.taskID
                         ? {...task, title: action.payload.title} : task)
             }
+        case ACTIONS.ADD_TODOLIST: return {
+            ...state, [action.payload.todolistID]: []
+        }
         default:
             return state;
     }
