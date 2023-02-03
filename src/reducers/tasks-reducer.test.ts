@@ -1,7 +1,7 @@
 import {v1} from 'uuid';
 import { TasksType } from '../Todolist';
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer';
-import { addTodolistAC } from './todolist-reducer';
+import {addTodolistAC, removeTodolistAC} from './todolist-reducer';
 
 test('task should be removed is correct', () => {
 
@@ -175,4 +175,37 @@ test('new array should be added when new todolist is added', () => {
 
     expect(keys.length).toBe(3);
     expect(endState[newKey]).toEqual([]);
+});
+
+test('property with todolistId should be deleted', () => {
+
+    const todolistID1 = v1();
+    const todolistID2 = v1();
+
+    const startState: TasksType = {
+        [todolistID1]: [
+            {id: '1', title: 'The Madness Of Crowds', isDone: true},
+            {id: '2', title: 'Atomic Habits:', isDone: true},
+            {id: '3', title: 'The Rise and Fall of the Third Reich', isDone: true},
+            {id: '4', title: 'JavaScript for Kids', isDone: true},
+            {id: '5', title: `JavaScript Absolute Beginner's Guide`, isDone: false},
+        ],
+        [todolistID2]: [
+            {id: '1', title: 'HTML & CSS', isDone: true},
+            {id: '2', title: 'Javascript', isDone: true},
+            {id: '3', title: 'Typescript', isDone: true},
+            {id: '4', title: 'React', isDone: true},
+            {id: '5', title: 'Node.JS', isDone: false},
+        ],
+    };
+
+    const action = removeTodolistAC(todolistID2);
+
+    const endState = tasksReducer(startState, action);
+
+
+    const keys = Object.keys(endState);
+
+    expect(keys.length).toBe(1);
+    expect(endState[todolistID2]).not.toBeDefined();
 });

@@ -18,10 +18,16 @@ export const tasksReducer = (state: TasksType, action: TasksReducerActionsType |
                 ...state, [action.payload.todolistID]: state[action.payload.todolistID].filter((task: TaskType) =>
                     task.id !== action.payload.taskID)
             }
-        case ACTIONS.REMOVE_TODOLIST:
-            return {
-                ...state, [action.payload.todolistID]: []
-            }
+        case ACTIONS.REMOVE_TODOLIST: {
+            // let copyState = {...state};
+            // delete copyState[action.payload.todolistID];
+            // return copyState;
+
+            // ...state, [action.payload.todolistID]: []
+
+            let {[action.payload.todolistID]: [], ...rest} = {...state}
+            return rest
+        }
         case ACTIONS.ADD_TASK:
             return {
                 ...state,
@@ -47,9 +53,10 @@ export const tasksReducer = (state: TasksType, action: TasksReducerActionsType |
                     state[action.payload.todolistID].map((task: TaskType) => task.id === action.payload.taskID
                         ? {...task, title: action.payload.title} : task)
             }
-        case ACTIONS.ADD_TODOLIST: return {
-            ...state, [action.payload.todolistID]: []
-        }
+        case ACTIONS.ADD_TODOLIST:
+            return {
+                ...state, [action.payload.todolistID]: []
+            }
         default:
             return state;
     }
