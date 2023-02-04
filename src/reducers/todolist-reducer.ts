@@ -1,10 +1,11 @@
 import {v1} from 'uuid';
-import {TodolistType} from '../Todolist';
+import {TasksFilterType, TodolistType} from '../Todolist';
 
 enum ACTIONS {
     REMOVE_TODOLIST = 'REMOVE_TODOLIST',
     ADD_TODOLIST = 'ADD_TODOLIST',
     CHANGE_TODOLIST_TITLE = 'CHANGE_TODOLIST_TITLE',
+    CHANGE_TODOLIST_FILTER = 'CHANGE_TODOLIST_FILTER',
 }
 
 export const todolistReducer = (state: Array<TodolistType>, action: TodolistReducerActionsType) => {
@@ -17,6 +18,10 @@ export const todolistReducer = (state: Array<TodolistType>, action: TodolistRedu
             return state.map((todolist: TodolistType) => todolist.id === action.payload.todolistID
                 ? {...todolist, title: action.payload.title}
                 : todolist)
+        case ACTIONS.CHANGE_TODOLIST_FILTER:
+            return state.map((todolist: TodolistType) => todolist.id === action.payload.todolistID
+                ? {...todolist, filter: action.payload.filter}
+                : todolist)
         default:
             return state;
     }
@@ -25,7 +30,8 @@ export const todolistReducer = (state: Array<TodolistType>, action: TodolistRedu
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>;
 export type AddTodolistActionType = ReturnType<typeof addTodolistAC>;
 export type ChangeTodolistTitleActionType = ReturnType<typeof changeTodolistTitleAC>;
-type TodolistReducerActionsType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistTitleActionType;
+export type ChangeTodolistFilterActionType = ReturnType<typeof changeTodolistFilterAC>;
+type TodolistReducerActionsType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistTitleActionType | ChangeTodolistFilterActionType;
 
 export const removeTodolistAC = (todolistID: string) => {
     return {
@@ -44,5 +50,11 @@ export const changeTodolistTitleAC = (todolistID: string, title: string) => {
     return {
         type: ACTIONS.CHANGE_TODOLIST_TITLE,
         payload: {todolistID, title}
+    } as const
+}
+export const changeTodolistFilterAC = (todolistID: string, filter: TasksFilterType) => {
+    return {
+        type: ACTIONS.CHANGE_TODOLIST_FILTER,
+        payload: {todolistID, filter}
     } as const
 }
