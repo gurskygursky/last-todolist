@@ -1,10 +1,10 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react'
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react'
 
 type PropsType = {
     callback: (value: string) => void;
 }
 
-export const InputForm: React.FC<PropsType> = (props) => {
+export const InputForm: React.FC<PropsType> = memo((props) => {
 
     const [value, setValue] = useState<string>('');
     const [error, setError] = useState<string | null>('');
@@ -37,7 +37,7 @@ export const InputForm: React.FC<PropsType> = (props) => {
     return (
         <div>
             <input className={error ? 'error' : ''}
-                   // style={error ? {borderColor: 'crimson'} : {}}
+                // style={error ? {borderColor: 'crimson'} : {}}
                    type={'text'}
                    value={value}
                    onChange={onChangeHandler}
@@ -47,4 +47,4 @@ export const InputForm: React.FC<PropsType> = (props) => {
             <div className={error ? 'textError' : ''}>{error}</div>
         </div>
     );
-};
+});

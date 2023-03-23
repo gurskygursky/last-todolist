@@ -1,15 +1,15 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, memo, useCallback} from 'react';
 
 type PropsType = {
     isDone: boolean
     callback: (isDone: boolean) => void;
 }
 
-export const Checkbox: React.FC<PropsType> = (props) => {
+export const Checkbox: React.FC<PropsType> = memo((props) => {
 
-    const onChangeCheckboxHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const onChangeCheckboxHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         props.callback(event.currentTarget.checked);
-    }
+    }, [props.callback]);
 
     return (
         <input type={'checkbox'}
@@ -17,4 +17,4 @@ export const Checkbox: React.FC<PropsType> = (props) => {
                onChange={onChangeCheckboxHandler}
         />
     );
-};
+});

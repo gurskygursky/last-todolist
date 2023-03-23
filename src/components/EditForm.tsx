@@ -1,11 +1,11 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, memo, useState} from 'react';
 
 type PropsType = {
     callback: (value: string) => void;
     value: string;
 }
 
-export const EditForm: React.FC<PropsType> = (props) => {
+export const EditForm: React.FC<PropsType> = memo((props) => {
 
     const [value, setValue] = useState<string>(props.value);
     const [error, setError] = useState<string | null>(null);
@@ -53,4 +53,4 @@ export const EditForm: React.FC<PropsType> = (props) => {
             />
             : <span onDoubleClick={editModeHandler}>{props.value}</span>
     );
-};
+});
